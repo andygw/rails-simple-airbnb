@@ -1,0 +1,32 @@
+<h1>All flats</h1>
+<div id="flats" class="d-flex flex-wrap">
+  <% @flats.each do |flat| %>
+    <div class="card card-secondary border-secondary m-1 col-6 col-sm-4 col-md-3 col-xl-2 d-flex">
+      <div class="p-2">
+        <%= image_tag flat.image_url, height: "200px", width: "100%" %>
+        <h4>
+          <%= link_to flat.name, flat_path(flat),
+            class: "text-decoration-none text-secondary"
+          %>
+        </h4>
+        <p class=""><%= flat.address %></p>
+        <div class="d-flex justify-content-between">
+          <p class="text-success">$<%= flat.price_per_night %></p>
+          <p class="text-primary">Max. guests: <%= flat.number_of_guests %></p>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="d-flex mt-auto justify-content-end bg-light p-2">
+        <%= link_to "edit", edit_flat_path(flat),
+          class: "btn btn-sm btn-outline-secondary mx-2"
+        %>
+        <%= link_to "delete", flat_path(flat),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to remove?"},
+          class: "btn btn-sm btn-outline-danger mx-2"
+        %>
+      </div>
+    </div>
+  <% end %>
+</div>
